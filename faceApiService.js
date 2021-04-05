@@ -13,7 +13,7 @@ async function bufferToTensor(file) {
   casted.dispose();
   return result;
 }
-async function detect(file) {
+exports.detect = async (file)=> {
   try {
     await faceapi.tf.setBackend("tensorflow");
     await faceapi.tf.enableProdMode();
@@ -62,4 +62,4 @@ async function detect(file) {
     console.log(error);
   }
 }
-exports.detect=detect  
+  

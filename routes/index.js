@@ -4,14 +4,12 @@ const { detect } = require("../faceApiService");
 
 router.post("/upload", async (req, res) => {
   try {
-    const { file } = req.files;
-    const similiarity = await detect(file.data)
-    res.json({
-      similiarity
-    });
+    const { file:{data} } = req.files;
+    const similarity = await detect(data)
+    res.json({similarity});
   } catch (error) {
     console.log(error);
-    res.json({ error:error })
+    res.json({ "error":error })
   }
 
 });
