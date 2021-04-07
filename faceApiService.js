@@ -4,7 +4,6 @@ const tf = require("@tensorflow/tfjs-node");
 const faceapi = require("@vladmandic/face-api/dist/face-api.node.js");
 const modelPathRoot = "./models";
 
-let optionsSSDMobileNet;
 async function bufferToTensor(file) {
   const decoded = tf.node.decodeImage(file);
   const casted = decoded.toFloat();
@@ -25,10 +24,6 @@ exports.detect = async (file)=> {
     await faceapi.nets.ssdMobilenetv1.loadFromDisk(modelPath);
     await faceapi.nets.faceLandmark68Net.loadFromDisk(modelPath);
     await faceapi.nets.faceRecognitionNet.loadFromDisk(modelPath);
-
-    optionsSSDMobileNet = new faceapi.SsdMobilenetv1Options({
-      minConfidence: 0.5,
-    });
 
     //take data image from public directory
     let refImageDir = path.join(__dirname, `./public/images/rbt1.jpg`)
